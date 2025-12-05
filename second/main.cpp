@@ -8,12 +8,15 @@ using namespace std;
 bool isInvalidID(long long i) {
     string s = to_string(i);
 
-    for (int i = 1; i <= s.size() / 2; ++i) {
-        if (s.size() % i != 0) continue;
-
+    for (int i = 1; i <= s.size() / 2; ++i)
+	{
+        if (s.size() % i != 0)
+			continue;
         bool result = true;
-        for (int pos = i; pos < s.size(); pos += i) {
-            if (s.compare(pos, i, s.substr(0, i)) != 0) {
+        for (int pos = i; pos < s.size(); pos += i)
+		{
+            if (s.compare(pos, i, s.substr(0, i)) != 0)
+			{
                 result = false;
                 break;
             }
@@ -21,7 +24,6 @@ bool isInvalidID(long long i) {
         if (result)
             return true;
     }
-
     return false;
 }
 
