@@ -16,7 +16,7 @@ int main(int argc, char **argv)
         return (cerr << "wrong file", 1);
 
     string line;
-    long long result = 0;
+    long long result = -1;
 	vector<string> map;
     while (getline(file, line))
     {
@@ -25,6 +25,7 @@ int main(int argc, char **argv)
 		map.push_back(line);
     }
 	long long aux = 1;
+	long long signaux = 0;
 	long long numAux = -1;
 	
 	while(map[map.size() -1][0])
@@ -32,13 +33,15 @@ int main(int argc, char **argv)
 		if(map[map.size() -1][0] == '*')
 		{
 			result += aux;
-			aux = 1;
-
+			cout <<"res "<< aux << endl;
+			signaux = 1;
+			aux = 0;
 		}
 		else if(map[map.size() -1][0] == '+')
 		{
-
 			result += aux;
+			cout <<"res "<< aux << endl;
+			signaux = 0;
 			aux = 0;
 		}
 		numAux = -1;
@@ -56,16 +59,20 @@ int main(int argc, char **argv)
 				numAux = numAux *10;
 				numAux += (map[i][0] - '0');
 			}
-    		cout <<"res "<< numAux << endl;
+    		cout << numAux << endl;
 			map[i] = map[i].substr(1);
 		}
 		map[map.size() -1] =  map[map.size() -1].substr(1);
-		if(map[map.size() -1][0] == '*')
-			aux = aux * numAux;
-		else if(map[map.size() -1][0] == '+')
+		if( numAux == -1)
+			continue;
+		if(signaux == 1){
+			if(aux == 0)
+				aux = 1;
+			aux = aux * numAux;}
+		else if(signaux == 0)
 			aux = aux + numAux;
 	}
-
+	result += aux;
     cout << "result: " << result << endl;
     return 0;
 }
